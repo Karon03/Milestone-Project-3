@@ -4,6 +4,7 @@ const {DataTypes, Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
     class Transaction extends Model {
     }
+    
     Transaction.init({
         userId: {
             type: DataTypes.INTEGER,
