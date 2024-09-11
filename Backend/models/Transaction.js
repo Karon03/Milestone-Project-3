@@ -1,6 +1,5 @@
 'use strict'
 const {DataTypes, Model } = require('sequelize') 
-// or DataType where model is?
 module.exports = (sequelize, DataTypes) => {
     class Transaction extends Model {
     }
@@ -34,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 defaultValue: DataTypes.NOW 
               },
-            // description optional
+            
 
             sequelize,  
             modelName: 'Transaction',  // Name of the model
