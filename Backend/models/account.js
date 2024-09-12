@@ -30,22 +30,6 @@ Account.init({
     tableName: 'accounts',
     timestamps: false
 })
-
-  // Adding a hook to hash the password before saving it to the database
-  {
-    beforeCreate; async (account) => {
-        if (account.password) {
-            const salt = await bcrypt.genSalt(10);  // Generate salt
-            account.password = await bcrypt.hash(account.password, salt);  // Hash password
-        }
-    },
-    beforeUpdate; async (account) => {
-        if (account.password) {
-            const salt = await bcrypt.genSalt(10);
-            account.password = await bcrypt.hash(account.password, salt);
-        }
-    }
-}
 return Account
 }
 
