@@ -10,9 +10,9 @@ app.use(express.urlencoded({ extended: false }))
 
 // ROOT
 app.get('/', (req, res) => {
-     res.status(200).json({
-     message: 'Welcome to (Name In Progress)'
- })
+    res.status(200).json({
+        message: 'Welcome to (Name In Progress)'
+    })
 })
 
 // Controllers & Routes
@@ -25,5 +25,5 @@ app.use('/accounts', require('./controllers/accounts'))
 
 // Listen for Connections
 app.listen(process.env.PORT, () => {
-     console.log(`Listening on ${process.env.PORT}`)
- })``
+    console.log(`Listening on ${process.env.PORT}`)
+})``
