@@ -1,6 +1,6 @@
-'use strict'
-'use strict'
-const { Model } = require('sequelize')
+'use strict';
+
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     class Transaction extends Model {}
@@ -36,14 +36,15 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Transaction',
         tableName: 'transactions',
         timestamps: true
-    })
+    });
 
     Transaction.associate = (models) => {
         Transaction.belongsTo(models.Account, {
             foreignKey: 'userId',
-            as: 'account'
+            as: 'account',
+            onDelete: 'CASCADE'  // Automatically delete transactions when the associated account is deleted
         });
-    }
+    };
 
-    return Transaction
-}
+    return Transaction;
+};
