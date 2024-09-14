@@ -3,10 +3,14 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Transaction extends Model { }
+    class Transaction extends Model {
+        static associate({ Account }) {
+            Transaction.belongsTo(Account, { as: 'account', foreignKey: 'account_id' })
+        }
+    }
 
     Transaction.init({
-        userId: {
+        transaction_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -37,14 +41,5 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'transactions',
         timestamps: true
     });
-
-    Transaction.associate = (models) => {
-        Transaction.belongsTo(models.Account, {
-            foreignKey: 'userId',
-            as: 'account',
-            onDelete: 'CASCADE'  // Automatically delete transactions when the associated account is deleted
-        });
-    };
-
     return Transaction;
 };
