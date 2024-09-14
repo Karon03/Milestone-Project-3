@@ -1,3 +1,4 @@
+
 'use strict';
 
 const fs = require('fs');
@@ -16,6 +17,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+// Load all models
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -31,11 +33,8 @@ fs
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+// Associations
+require('./Associations')(db);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
