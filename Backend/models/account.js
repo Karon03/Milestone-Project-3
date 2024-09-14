@@ -2,7 +2,11 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-    class Account extends Model {}
+    class Account extends Model {
+        static associate({ Transaction }) {
+            Account.hasMany(Transaction, { as: 'transactions', foreignKey: 'transaction_id' })
+        }
+    }
 
     Account.init({
         account_id: {
@@ -28,14 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'accounts',
         timestamps: false
     })
-
-    Account.associate = (models) => {
-        Account.hasMany(models.Transaction, {
-            foreignKey: 'userId',
-            as: 'transactions'
-        });
-    }
-
     return Account
 }
 
