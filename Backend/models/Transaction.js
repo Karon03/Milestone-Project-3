@@ -3,15 +3,15 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Transaction extends Model {}
+    class Transaction extends Model { }
 
     Transaction.init({
         userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: 'accounts',
-              key: 'account_id'
+                model: 'accounts',
+                key: 'account_id'
             }
         },
         type: {
