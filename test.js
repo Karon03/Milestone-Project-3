@@ -5,6 +5,10 @@ const list = document.getElementById('list');
 const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
+const testLabels = ['test','test','test','test','test'];
+const testData = [1,2,7,3,5];
+const testData2 = [4,3,1,8,5];
+const barColors = ['red','blue','green','purple','orange'];
 
 // const dummyTransactions = [
 //   { id: 1, text: 'Flower', amount: -20 },
@@ -82,7 +86,7 @@ function updateValues() {
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
-
+    
   const expense = (
     amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) *
     -1
@@ -120,13 +124,13 @@ init();
 form.addEventListener('submit', addTransaction);
 
 
-new Chart("myChart", {
+new Chart("Income", {
     type: "pie",
     data: {
-      labels: chartDataPositive,
+      labels: testLabels,
       datasets: [{
         backgroundColor: barColors,
-        data: yValues
+        data: testData,
       }]
     },
     options: {
@@ -135,21 +139,21 @@ new Chart("myChart", {
         text: "Income Overview"
       }
     }
-  });
+  })
 
-//   new Chart("myChart", {
-//     type: "pie",
-//     data: {
-//       labels: xValues,
-//       datasets: [{
-//         backgroundColor: barColors,
-//         data: yValues
-//       }]
-//     },
-//     options: {
-//       title: {
-//         display: true,
-//         text: "World Wide Wine Production"
-//       }
-//     }
-//   });
+  new Chart("Expenses", {
+    type: "pie",
+    data: {
+      labels: testLabels,
+      datasets: [{
+        backgroundColor: barColors,
+        data: testData2,
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Expenses Overview"
+      }
+    }
+  })
