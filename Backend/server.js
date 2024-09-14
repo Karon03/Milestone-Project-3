@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }))
 // ROOT
 app.get('/', (req, res) => {
     res.status(200).json({
-        message: 'Welcome to (Name In Progress)'
+        message: 'Welcome to Dinero!'
     })
 })
 
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.use(express.urlencoded({ extended: false }))
 
-// app.use('/transactions', require('./controllers/transactions'))
+app.use('/transactions', require('./controllers/transactions'))
 app.use('/authentication', require('./controllers/authentication'))
 app.use('/accounts', require('./controllers/accounts'))
 
