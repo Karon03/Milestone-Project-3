@@ -9,7 +9,8 @@
 }
 
 body {
-  background-color: #f7f7f7;
+  background-color: #1Ca46f;
+  /* background-color: white; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,11 +19,16 @@ body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-size: 18px;
+  color: white;
 }
 
 .container {
   margin: 30px auto;
   width: 400px;
+}
+
+.moneyhead{
+color: black;
 }
 
 h1 {
