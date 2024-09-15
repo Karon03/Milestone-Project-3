@@ -5,18 +5,16 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Transaction extends Model {
         static associate({ Account }) {
-            Transaction.belongsTo(Account, { as: 'account', foreignKey: 'account_id' })
+            // Define association between Transaction and Account models
+            Transaction.belongsTo(Account, { as: 'account', foreignKey: 'account_id' });
         }
     }
 
     Transaction.init({
         transaction_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'accounts',
-                key: 'account_id'
-            }
+            primaryKey: true,
+            autoIncrement: true
         },
         type: {
             type: DataTypes.ENUM('income', 'expense'),
@@ -34,12 +32,21 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW
+        },
+        account_id: {  // Foreign key column CHANGED HERE
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'accounts',  // Name of the table being referenced
+                key: 'id'           // Primary key column in the referenced table TO HERE
+            },
         }
     }, {
         sequelize,
         modelName: 'Transaction',
         tableName: 'transactions',
-        timestamps: true
+        timestamps: false
     });
+
     return Transaction;
 };
