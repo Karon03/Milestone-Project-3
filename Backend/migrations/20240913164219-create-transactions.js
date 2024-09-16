@@ -28,7 +28,7 @@ module.exports = {
       },
       amount: {
         type: Sequelize.FLOAT,
-        allowNull: false
+        allowNull: falsenpm
       },
       date: {
         type: Sequelize.DATE,
