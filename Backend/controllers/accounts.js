@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const accounts = await User.findAll()
+    const accounts = await Account.findAll()
     res.json(accounts)
 })
 
