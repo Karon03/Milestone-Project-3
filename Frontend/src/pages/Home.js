@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Dakota-Frontend/landing.css'; // Import your CSS file
+
 
 const Home = () => {
   return (
