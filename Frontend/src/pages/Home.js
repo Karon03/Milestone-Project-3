@@ -1,7 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Dakota-Frontend/landing.css'; // Import your CSS file
 
+// Define styles here
+const styles = {
+  container: {
+    textAlign: 'center',
+    padding: '20px',
+    backgroundColor: '#f4f4f4', // Example background color
+  },
+  buttons: {
+    margin: '20px 0',
+  },
+  button: {
+    textDecoration: 'none',
+    padding: '10px 20px',
+    color: '#fff',
+    backgroundColor: '#007bff',
+    borderRadius: '5px',
+    margin: '5px',
+    fontSize: '16px',
+  },
+};
 
 const Home = () => {
   return (
@@ -22,6 +41,5 @@ const Home = () => {
     </div>
   );
 };
-  
-  export default Home;
-  
+
+export default Home;
