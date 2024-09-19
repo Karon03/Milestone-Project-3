@@ -4,6 +4,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import User from './components/User';
+import Form from './components/Form';
+import TransactionList from './components/TransactionList';
 
 function App() {
   return (
