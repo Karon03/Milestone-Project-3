@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Define styles here
+// Need to import our styles so we can delete all this below
 const styles = {
   container: {
     textAlign: 'center',
     padding: '20px',
-    backgroundColor: '#f4f4f4', // Example background color
+    backgroundColor: '#9c88ff'// Example background color
   },
   buttons: {
     margin: '20px 0',
