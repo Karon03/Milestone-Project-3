@@ -1,6 +1,4 @@
 // signup is still in progress
-
-
 import React, { useState } from 'react';
 
 const Signup = () => {
@@ -18,80 +16,84 @@ const Signup = () => {
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
             return;
-          }
- const userData = {
-        username,
-        email,
-        password
+        }
+
+        const userData = {
+            username,
+            email,
+            password
         };
+
         try {
-            // Example fetch call to backend for signup
-            const response = await fetch('http://localhost:5000/api/signup', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(userData)
+            // Fetch call to backend for signup
+            const response = await fetch('http://localhost:5000/accounts/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
             });
+
             if (response.ok) {
                 setSuccess(true);
-              } else {
+            } else {
                 const errMsg = await response.json();
-                setError(errMsg.message || 'Signup failed.');
-              }
-            } catch (error) {
-              setError('An error occurred during signup.');
+                setError(errMsg.error || 'Signup failed.');
             }
-          };
-          return (
-            <div className="signup-container">
-              <h2>Sign Up</h2>
-              {error && <p className="error">{error}</p>}
-              {success ? (
+        } catch (error) {
+            setError('An error occurred during signup.');
+        }
+    };
+
+    return (
+        <div className="signup-container">
+            <h2>Sign Up</h2>
+            {error && <p className="error">{error}</p>}
+            {success ? (
                 <p className="success">Signup successful! Please log in.</p>
-              ) : (
+            ) : (
                 <form onSubmit={handleSubmit}>
-                  <div>
-                    <label>Username:</label>
-                    <input
-                      type="text"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label>Email:</label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label>Password:</label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label>Confirm Password:</label>
-                    <input
-                      type="password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <button type="submit">Sign Up</button>
+                    <div>
+                        <label>Username:</label>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Email:</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Confirm Password:</label>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Sign Up</button>
                 </form>
-              )}
-            </div>
-          );
-        };
-        
-        export default Signup;
+            )}
+        </div>
+    );
+};
+
+export default Signup;
