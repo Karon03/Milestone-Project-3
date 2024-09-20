@@ -1,6 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Need to import our styles so we can delete all this below
+const styles = {
+  container: {
+    textAlign: 'center',
+    padding: '20px',
+    backgroundColor: '#9c88ff'// Example background color
+  },
+  buttons: {
+    margin: '20px 0',
+  },
+  button: {
+    textDecoration: 'none',
+    padding: '10px 20px',
+    color: '#fff',
+    backgroundColor: '#007bff',
+    borderRadius: '5px',
+    margin: '5px',
+    fontSize: '16px',
+  },
+};
+
 const Home = () => {
   return (
     <div style={styles.container}>
@@ -20,6 +41,5 @@ const Home = () => {
     </div>
   );
 };
-  
-  export default Home;
-  
+
+export default Home;

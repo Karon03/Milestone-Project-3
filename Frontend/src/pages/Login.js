@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Use Link instead of <a> tag
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +12,6 @@ const Login = () => {
     
     const credentials = { email, password };
 
-    // Simulate a POST request to authenticate the user
     try {
       const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
@@ -34,11 +33,11 @@ const Login = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div>
       <h2>Login to Your Account</h2>
-      {errorMessage && <p style={styles.error}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.inputGroup}>
+      {errorMessage && <p>{errorMessage}</p>}
+      <form onSubmit={handleSubmit}>
+        <div>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -48,7 +47,7 @@ const Login = () => {
             required
           />
         </div>
-        <div style={styles.inputGroup}>
+        <div>
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -58,12 +57,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p> {/* Use Link here */}
     </div>
   );
 };
+
 export default Login;
