@@ -61,14 +61,10 @@ router.post('/login', async (req, res) => {
         }
 
         // You can generate a token here if you're implementing JWT authentication
-
-        res.status(200).json({
-            message: "Login successful",
-            user: {
-                username: account.username,
-                email: account.email
-            }
-        });
+    // Generate JWT token
+    const result = await jwt.sign({ id: account.account_id}, process.env.JWT_SECRET);
+    console.log(account)
+    res.json({ account: account, token: result.value });
 
     } catch (error) {
         console.error("Error logging in:", error);
@@ -81,7 +77,7 @@ router.get('/profile', async (req, res) => {
         // Assuming you're using JWT for authentication
         const token = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decoded.id; // Assuming you have the user ID in the token
+        const accountId = decoded.id; // Assuming you have the user ID in the token
 
         const user = await Account.findByPk(userId);
         if (!user) {
