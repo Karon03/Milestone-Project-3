@@ -35,7 +35,9 @@ router.get('/profile', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
+           console.log(authHeader)
             return res.status(401).json({ message: 'Unauthorized' });
+            
         }
         
         const token = authHeader.split(' ')[1];
@@ -43,6 +45,7 @@ router.get('/profile', async (req, res) => {
         // Decode the JWT token
         const result = await jwt.decode(process.env.JWT_SECRET, token);
         if (result.error) {
+             console.log(result)
             return res.status(401).json({ message: 'Invalid token' });
         }
         
