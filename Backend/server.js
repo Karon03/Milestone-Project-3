@@ -1,12 +1,17 @@
 // DEPENDENCIES
-const express = require('express')
-
-// CONFIGURATION
 require('dotenv').config()
-const PORT = process.env.PORT
-const app = express()
-app.use(express.json());
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors');
+
+// const PORT = process.env.PORT
+const app = express();
+
+// Express Settings
+
 app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(cors())
 
 // ROOT
 app.get('/', (req, res) => {

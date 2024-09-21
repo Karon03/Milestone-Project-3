@@ -1,15 +1,15 @@
 const router = require('express').Router();
 const db = require("../models");
 const bcrypt = require('bcrypt');
-// const jwt = require('json-web-token');
+const jwt = require('json-web-token');
 
-const { Account } = db;  // Use Account model
+const { Account } = db; 
 
 // Login route (POST /)
 router.post('/', async (req, res) => {
     try {
         const { email, password } = req.body;
-        
+
         // Find the account by email
         const account = await Account.findOne({
             where: { email: email }
@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
         const result = await jwt.encode(process.env.JWT_SECRET, { id: account.account_id });
         res.json({ account: account, token: result.value });
     } catch (error) {
+        console.error('Error logging in:', error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -31,27 +32,33 @@ router.post('/', async (req, res) => {
 // Profile route (GET /profile)
 router.get('/profile', async (req, res) => {
     try {
-        const [method, token] = req.headers.authorization.split(' ');
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
         
-        if (method === 'Bearer') {
-            // Decode the JWT token
-            const result = await jwt.decode(process.env.JWT_SECRET, token);
-            const { id } = result.value;
+        const token = authHeader.split(' ')[1];
 
-            // Find the account by ID
-            const account = await Account.findOne({
-                where: { account_id: id }
-            });
+        // Decode the JWT token
+        const result = await jwt.decode(process.env.JWT_SECRET, token);
+        if (result.error) {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+        
+        const { id } = result.value;
 
-            if (account) {
-                res.json(account);
-            } else {
-                res.status(404).json({ message: 'Account not found' });
-            }
+        // Find the account by ID
+        const account = await Account.findOne({
+            where: { account_id: id }
+        });
+
+        if (account) {
+            res.json(account);
         } else {
-            res.status(401).json({ message: 'Unauthorized' });
+            res.status(404).json({ message: 'Account not found' });
         }
     } catch (err) {
+        console.error('Error fetching user profile:', err);
         res.status(500).json({ error: err.message });
     }
 });
