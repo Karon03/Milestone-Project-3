@@ -24,10 +24,7 @@ const styles = {
 
 const Home = () => {
   return (
-    <div style={styles.container}>
-      <h1>Welcome to the Expense Tracker App</h1>
-      <p>Track your income and expenses effortlessly.</p>
-      
+    <div>
       <div style={styles.buttons}>
         <Link to="/login" style={styles.button}>
           Log In
