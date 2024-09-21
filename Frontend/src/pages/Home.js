@@ -32,8 +32,11 @@ const Home = () => {
         <Link to="/signup" style={styles.button}>
           Sign Up
         </Link>
+        <div>
+          Server URL: {process.env.REACT_APP_SERVER_URL}
+        </div>
       </div>
-
+      
       <p>Already have an account? <Link to="/login">Log in here</Link></p>
     </div>
   );
