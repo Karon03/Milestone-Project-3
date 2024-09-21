@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import '../Dakota-Frontend/landing.css'
+// import '../Dakota-Frontend/landing.css'  put css in public folder to import
 // Need to import our styles so we can delete all this below
 const styles = {
   container: {
