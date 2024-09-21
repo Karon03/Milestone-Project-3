@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             references: {
                 model: 'accounts',  // Name of the table being referenced
-                key: 'id'           // Primary key column in the referenced table TO HERE
+                key: 'account_id'           // Primary key column in the referenced table TO HERE
             },
         }
     }, {

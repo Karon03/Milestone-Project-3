@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         const account = await Account.findOne({
             where: { email: email }
         });
-
+        console.log(account)
         // Check if the account exists and the password is correct
         if (!account || !await bcrypt.compare(password, account.password)) {
             return res.status(404).json({ message: 'Could not find an account with the provided email and password' });
@@ -22,6 +22,7 @@ router.post('/', async (req, res) => {
 
         // Generate JWT token
         const result = await jwt.encode(process.env.JWT_SECRET, { id: account.account_id });
+    
         res.json({ account: account, token: result.value });
     } catch (error) {
         console.error('Error logging in:', error);
