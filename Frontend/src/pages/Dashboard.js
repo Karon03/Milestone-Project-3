@@ -1,9 +1,11 @@
 
 // track
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import {CurrentUser} from '../context/CurrentUser';
 
-
-const Dashboard = ({ accountId }) => {
+const Dashboard = () => {
+  const {currentUser} = useContext(CurrentUser);
+  const accountId = undefined
   const [income, setIncome] = useState('');
   const [transactionAmount, setTransactionAmount] = useState('');
   const [transactionsList, setTransactionsList] = useState([]);  // Initialize as an empty array
@@ -12,9 +14,14 @@ const Dashboard = ({ accountId }) => {
   // fetch token before making the call 
   useEffect(() => {
     const fetchTransactions = async () => {
+      if (!currentUser) {
+        console.error('User not logged in');
+        return;
+      }
+
       try {
         // need to pass bearer token with url
-        const response = await fetch(`http://localhost:5000/transactions/`);
+        const response = await fetch(`http://localhost:5000/transactions/${accountId}`);
         const data = await response.json();
         
         // Ensure that the data is an array before setting state
@@ -36,6 +43,7 @@ const Dashboard = ({ accountId }) => {
   };
 
   const handleTransactionChange = (e) => {
+    
     setTransactionAmount(e.target.value);
   };
 
@@ -63,7 +71,7 @@ const Dashboard = ({ accountId }) => {
           setTransactionsList((prev) => [...prev, newTransaction]); // Add new transaction to the list
           setTransactionAmount(''); // Reset input field
         } else {
-          console.error('Error adding transaction');
+          console.error('Error adding transaction', e);
         }
       } catch (error) {
         console.error('Error adding transaction:', error);
