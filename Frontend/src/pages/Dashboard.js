@@ -1,14 +1,20 @@
 
-// track
 import React, { useState, useEffect, useContext } from 'react';
-import {CurrentUser} from '../context/CurrentUser';
+import { CurrentUser } from '../context/CurrentUser';
 
 const Dashboard = () => {
-  const {currentUser} = useContext(CurrentUser);
-  const accountId = undefined
+  const { currentUser } = useContext(CurrentUser);
+  const [accountId, setAccountId] = useState(undefined);
   const [income, setIncome] = useState('');
   const [transactionAmount, setTransactionAmount] = useState('');
   const [transactionsList, setTransactionsList] = useState([]);  // Initialize as an empty array
+
+  // Set accountId when currentUser changes
+  useEffect(() => {
+    if (currentUser && currentUser.account_id) {
+      setAccountId(currentUser.account_id);
+    }
+  }, [currentUser]);
 
   // Fetch transactions from the backend 
   // fetch token before making the call 
@@ -18,7 +24,7 @@ const Dashboard = () => {
         console.error('User not logged in');
         return;
       }
-
+     
       try {
         // need to pass bearer token with url
         const response = await fetch(`http://localhost:5000/transactions/${accountId}`);
@@ -35,15 +41,16 @@ const Dashboard = () => {
       }
     };
 
-    fetchTransactions();
-  }, [accountId]);
+    if (accountId) {
+      fetchTransactions();
+    }
+  }, [accountId, currentUser]);
 
   const handleIncomeChange = (e) => {
     setIncome(e.target.value);
   };
 
   const handleTransactionChange = (e) => {
-    
     setTransactionAmount(e.target.value);
   };
 
@@ -59,7 +66,9 @@ const Dashboard = () => {
           },
           body: JSON.stringify({
             account_id: accountId, // Include accountId to associate the transaction
+            //TODO: Add a type field to the form and use it here
             type: 'expense', // Assuming you're adding an expense; can be dynamic
+            //TODO: Add a category field to the form and use it here
             category: 'General', // Can be dynamic based on user input
             amount: parseFloat(transactionAmount), // Ensure it's a float
             date: new Date().toISOString(), // Set the current date

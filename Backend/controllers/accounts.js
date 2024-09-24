@@ -41,36 +41,36 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-// Login route
-router.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+// // Login route
+// router.post('/login', async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ error: "Email and password are required" });
-        }
+//         if (!email || !password) {
+//             return res.status(400).json({ error: "Email and password are required" });
+//         }
 
-        const account = await Account.findOne({ where: { email } });
-        if (!account) {
-            return res.status(400).json({ error: "Invalid credentials" });
-        }
+//         const account = await Account.findOne({ where: { email } });
+//         if (!account) {
+//             return res.status(400).json({ error: "Invalid credentials" });
+//         }
 
-        const isPasswordValid = await bcrypt.compare(password, account.password);
-        if (!isPasswordValid) {
-            return res.status(400).json({ error: "Invalid credentials" });
-        }
+//         const isPasswordValid = await bcrypt.compare(password, account.password);
+//         if (!isPasswordValid) {
+//             return res.status(400).json({ error: "Invalid credentials" });
+//         }
 
-        // You can generate a token here if you're implementing JWT authentication
-    // Generate JWT token
-    const result = await jwt.sign({ id: account.account_id}, process.env.JWT_SECRET);
-    console.log(account)
-    res.json({ account: account, token: result.value });
+//         // You can generate a token here if you're implementing JWT authentication
+//     // Generate JWT token
+//     const result = await jwt.sign({ id: account.account_id}, process.env.JWT_SECRET);
+//     console.log(account)
+//     res.json({ account: account, token: result.value });
 
-    } catch (error) {
-        console.error("Error logging in:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-});
+//     } catch (error) {
+//         console.error("Error logging in:", error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// });
 // Profile route
 router.get('/profile', async (req, res) => {
     try {

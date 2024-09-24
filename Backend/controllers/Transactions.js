@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get all Transactions for a specific account (GET)
-router.get('/:account_id', async (req, res) => {
+router.get('/account/:account_id', async (req, res) => {
     try {
         const { account_id } = req.params;
         if (!account_id) {
