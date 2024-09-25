@@ -2,6 +2,7 @@
 .vscode/*
 Backend/node_modules
 Frontend/node_modules
+Backend/client/*
 Backend/.env
 Frontend/.env
 out/*
