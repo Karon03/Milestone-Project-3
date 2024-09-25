@@ -33,19 +33,30 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: DataTypes.NOW
         },
-        account_id: {  // Foreign key column CHANGED HERE
+        account_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'accounts',  // Name of the table being referenced
-                key: 'account_id'           // Primary key column in the referenced table TO HERE
+                key: 'account_id'
             },
+        },
+        // Add these fields for automatic timestamping
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
         }
     }, {
         sequelize,
         modelName: 'Transaction',
         tableName: 'transactions',
-        timestamps: false
+        timestamps: true  // Enable Sequelize to manage createdAt and updatedAt
     });
 
     return Transaction;

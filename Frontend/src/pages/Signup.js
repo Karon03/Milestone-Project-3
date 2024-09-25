@@ -1,5 +1,6 @@
 // signup is still in progress
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -8,6 +9,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,16 +29,16 @@ const Signup = () => {
 
         try {
             // Fetch call to backend for signup
-            const response = await fetch('http://localhost:5000/accounts/signup', {
+            const response = await fetch(`/api/accounts/signup`, { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(userData)
             });
-
             if (response.ok) {
                 setSuccess(true);
+                navigate('/dashboard');
             } else {
                 const errMsg = await response.json();
                 setError(errMsg.error || 'Signup failed.');

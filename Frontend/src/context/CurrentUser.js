@@ -14,7 +14,7 @@ function CurrentUserProvider({ children }) {
                     return;
                 }
                 console.log(token)
-                const response = await fetch('http://localhost:5000/authentication/profile', {
+                const response = await fetch('/api/authentication/profile', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -24,7 +24,9 @@ function CurrentUserProvider({ children }) {
                     throw new Error(`Error: ${response.status} ${response.statusText}`);
                 }
 
+                
                 const user = await response.json();
+                console.log('I have the auth response', user);
                 setCurrentUser(user);
             } catch (error) {
                 console.error('Error fetching user profile:', error.message || error);

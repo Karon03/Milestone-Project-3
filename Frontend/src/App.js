@@ -7,12 +7,14 @@ import Form from './components/Form';
 import TransactionList from './components/TransactionList';
 import CurrentUserProvider from './context/CurrentUser';
 import Signup from './pages/Signup';
+import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Error404 from './pages/Error404';
 import './style.css'
 
 function App() {
   return (
+    <Layout>
     <CurrentUserProvider>
       <Router>
         <Routes>
@@ -27,6 +29,7 @@ function App() {
         </Routes>
       </Router>
     </CurrentUserProvider>
+    </Layout>
   );
 }
 

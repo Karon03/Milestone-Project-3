@@ -1,14 +1,35 @@
 body {
-  background-image: url(logo.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: 42%;
-    background-color: #1CA46F;
-    margin-top: 20px;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-size:17px;
-    line-height:1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  /* background-image: url(logo.jpg); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 42%;
+  background-color: #1CA46F;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.home-icon {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.card {
+  width: 100%;
+  min-width: 400px;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #dcfef1;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-container {
@@ -65,7 +86,7 @@ body {
   
   p {
     text-align: center;
-    color: #999;
+    color: #4b4b4b;
   }
   
   form {

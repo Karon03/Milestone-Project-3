@@ -14,7 +14,6 @@ router.post('/', async (req, res) => {
         const account = await Account.findOne({
             where: { email: email }
         });
-        console.log(account)
         // Check if the account exists and the password is correct
         if (!account || !await bcrypt.compare(password, account.password)) {
             return res.status(404).json({ message: 'Could not find an account with the provided email and password' });
@@ -35,7 +34,6 @@ router.get('/profile', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-           console.log(authHeader)
             return res.status(401).json({ message: 'Unauthorized' });
             
         }
@@ -45,7 +43,7 @@ router.get('/profile', async (req, res) => {
         // Decode the JWT token
         const result = await jwt.decode(process.env.JWT_SECRET, token);
         if (result.error) {
-             console.log(result)
+            console.error('AUTHENTICATION ERROR', result)
             return res.status(401).json({ message: 'Invalid token' });
         }
         

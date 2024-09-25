@@ -1,6 +1,7 @@
-
 import React, { useState, useEffect, useContext } from 'react';
 import { CurrentUser } from '../context/CurrentUser';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { currentUser } = useContext(CurrentUser);
@@ -8,13 +9,15 @@ const Dashboard = () => {
   const [income, setIncome] = useState('');
   const [transactionAmount, setTransactionAmount] = useState('');
   const [transactionsList, setTransactionsList] = useState([]);  // Initialize as an empty array
+  const navigate = useNavigate();
 
   // Set accountId when currentUser changes
   useEffect(() => {
     if (currentUser && currentUser.account_id) {
+      
       setAccountId(currentUser.account_id);
     }
-  }, [currentUser]);
+  }, [currentUser, accountId]);
 
   // Fetch transactions from the backend 
   // fetch token before making the call 
@@ -27,9 +30,8 @@ const Dashboard = () => {
      
       try {
         // need to pass bearer token with url
-        const response = await fetch(`http://localhost:5000/transactions/${accountId}`);
+        const response = await fetch(`/api/transactions/account/${accountId}`);
         const data = await response.json();
-        
         // Ensure that the data is an array before setting state
         if (Array.isArray(data)) {
           setTransactionsList(data);
@@ -57,24 +59,22 @@ const Dashboard = () => {
   // Handle adding a new transaction
   const handleAddTransaction = async (e) => {
     e.preventDefault();
+
     if (transactionAmount) {
       try {
-        const response = await fetch('http://localhost:5000/transactions', {
+        const response = await fetch('/api/transactions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             account_id: accountId, // Include accountId to associate the transaction
-            //TODO: Add a type field to the form and use it here
             type: 'expense', // Assuming you're adding an expense; can be dynamic
-            //TODO: Add a category field to the form and use it here
             category: 'General', // Can be dynamic based on user input
             amount: parseFloat(transactionAmount), // Ensure it's a float
             date: new Date().toISOString(), // Set the current date
           }),
         });
-
         if (response.ok) {
           const newTransaction = await response.json();
           setTransactionsList((prev) => [...prev, newTransaction]); // Add new transaction to the list
@@ -89,9 +89,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    (currentUser) ? (
+    <div className="card">
       <h2>Dashboard</h2>
-
       <div>
         <h3>Input Your Income</h3>
         <input
@@ -130,6 +130,15 @@ const Dashboard = () => {
         )}
       </ul>
     </div>
+  ) : (
+    <div>
+      <h2>Dashboard</h2>
+      <p>Please login to view your dashboard.</p>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <button onClick={() => navigate('/login')}>Login</button>
+      </div>
+    </div>
+    ) 
   );
 };
 

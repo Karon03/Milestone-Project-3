@@ -18,7 +18,9 @@ router.post('/', async (req, res) => {
             type,
             category,
             amount,
-            date
+            date,
+            createdAt: new Date(),
+            updatedAt: new Date()
         });
 
         res.status(201).json(transaction);  // Return the created transaction
@@ -85,7 +87,7 @@ router.put('/:id', async (req, res) => {
             type,
             category,
             amount,
-            date
+            updatedAt: date 
         });
 
         res.status(200).json(transaction);

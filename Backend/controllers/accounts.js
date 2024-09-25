@@ -5,10 +5,10 @@ const db = require("../models");
 const { Account } = db;
 
 const router = express.Router();
-
 // Account creation route
 router.post('/signup', async (req, res) => {
     try {
+        console.log('Signing up user', req);
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
@@ -75,6 +75,10 @@ router.post('/signup', async (req, res) => {
 router.get('/profile', async (req, res) => {
     try {
         // Assuming you're using JWT for authentication
+        if (!req.headers.authorization) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+        
         const token = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const accountId = decoded.id; // Assuming you have the user ID in the token
