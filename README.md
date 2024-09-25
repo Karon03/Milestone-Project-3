@@ -8,7 +8,7 @@ We were tasked with creating a full-stack application similar to our last group 
 
 ## How to Use the Application
 
-Upon entering the website, users will be prompted to either sign up or log in. After completing the signup or login process, users will be greeted by the Dashboard, where they can log transactions, input income amounts, and view a list of expenses/transactions.
+Upon entering the website, users will be prompted to either sign up or log in. After completing the signup or login process, users will be greeted by the Dashboard, where they can log transactions, input income amount, and view a list of expenses/transactions.
 
 ## Technologies Used
 
@@ -21,4 +21,4 @@ Upon entering the website, users will be prompted to either sign up or log in. A
 
 ## Fixes/Features for the Future
 
-As this application is a work in progress, we have several features planned for future implementation. One of the key enhancements will be ensuring that transactions are properly deducted from the total income. This section of the README will be updated regularly to reflect major changes and new developments
+As this application is a work in progress, we have several features planned for future implementation. One of the key enhancements will be ensuring that transactions are properly deducted from the total income. This section of the README will be updated regularly to reflect major changes and new developments!
