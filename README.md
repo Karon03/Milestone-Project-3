@@ -21,4 +21,4 @@ Upon entering the website, users will be prompted to either sign up or log in. A
 
 ## Fixes/Features for the Future
 
-As this application is still a work in progress, there are several outstanding issues that need to be addressed. We are currently working on styling all the pages properly. The signup page needs a redirect or a button to return to the home page or login. Additionally, the Dashboard page is still under development, and  need to ensure that the current features work and begin to add more to it. This secion of the README will be updated frequently as we go through major changes!
+As this application is a work in progress, we have several features planned for future implementation. One of the key enhancements will be ensuring that transactions are properly deducted from the total income. This section of the README will be updated regularly to reflect major changes and new developments
